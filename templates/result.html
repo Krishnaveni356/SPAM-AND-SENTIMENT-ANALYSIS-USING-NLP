@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Text Analysis Result</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f3f3f3;
+        }
+        .jumbotron {
+            background-color: #3498db;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <div class="jumbotron text-center">
+        <h1>Text Analysis Result</h1>
+        <p>Enhance your text analysis, and OCR!</p>
+    </div>
+    <div class="alert alert-success">
+        <h3>Sentiment Analysis Result:</h3>
+        <p>Polarity: <span id="polarity">{{sentiment}}</span></p>
+        <p>Subjectivity: <span id="subjectivity">{{ subjectivity }}</span></p>
+    </div>
+    <div class="alert alert-info">
+        <h3>Spam Classification Result:</h3>
+        <p id="spam_prediction">{{ spam_prediction }}</p>
+    </div>
+</div>
+
+<!-- Add JavaScript code to generate visualizations -->
+<script>
+    // Example: Modify sentiment polarity visualization
+    var polarity = parseFloat(document.getElementById('polarity').textContent);
+    var polarityText = document.getElementById('polarity');
+    if (polarity > 0.10) {
+        polarityText.textContent = polarity.toFixed(2) + " 😄"; // Display a smiling emoji for positive sentiment
+    } else if (polarity < -0.10) {
+        polarityText.textContent = polarity.toFixed(2) + " 😞"; // Display a sad emoji for negative sentiment
+    } else {
+        polarityText.textContent = polarity.toFixed(2) + " 😐"; // Display a neutral emoji for neutral sentiment
+    }
+
+    // Example: Modify spam classification visualization
+    var spamPrediction = parseInt(document.getElementById('spam_prediction').textContent.trim());
+    var spamPredictionText = document.getElementById('spam_prediction');
+
+    if (spamPrediction === 1) {
+        spamPredictionText.textContent = "Spam 🚫"; // Spam emoji
+    } else if (spamPrediction === 0) {
+        spamPredictionText.textContent = "Not Spam ✔️"; // Not spam emoji
+
+    }
+</script>
+</body>
+</html>

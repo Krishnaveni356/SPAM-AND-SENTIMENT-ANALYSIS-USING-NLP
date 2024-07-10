@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Text Summarisation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('/static/ai.jpg'); /* Specify the path to your image in the "static" folder */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: rgb(182, 200, 190), 255, 255; /* Set text color to be visible on the background */
+        }
+        .jumbotron {
+            background-color: rgba(178, 189, 196, 0.8); /* Add a semi-transparent background color */
+            animation: fade-in 2s forwards;
+        }
+        /* Change the background color of the OCR section to white */
+        .card-ocr {
+            background-color: #fff;
+        }
+        .card {
+            transition: all 0.5s ease-in-out;
+        }
+        .card:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        details {
+            font: 16px "Open Sans", Calibri, sans-serif;
+            width: 620px;
+        }
+        details > summary {
+            padding: 2px 6px;
+            width: 15em;
+            background-color: #ddd;
+            border: none;
+            box-shadow: 3px 3px 4px black;
+            cursor: pointer;
+        }
+        details > p {
+            border-radius: 0 0 10px 10px;
+            background-color: #ddd;
+            padding: 2px 6px;
+            margin: 0;
+            box-shadow: 3px 3px 4px black;
+        }
+        details[open] > summary {
+            background-color: #ccf;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <div class="jumbotron text-center">
+        <h1>Text Summarization</h1>
+        <p>Enhance your text analysis, and OCR!</p>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2>Text Analysis</h2>
+                </div>
+                <div class="card-body">
+                    <form action="/predict" method="post">
+                        <div class="form-group">
+                            <label for="message">Enter your text:</label>
+                            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Analyze Text</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2>OCR</h2>
+                </div>
+                <div class="card-body">
+                    <form action="/ocr" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="image">Upload an image for OCR:</label>
+                            <input type="file" class="form-control-file" id="image" name="file" accept="image/*" required>
+                        </div>
+                        <button type="submit" class="btn btn-warning">Perform OCR</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

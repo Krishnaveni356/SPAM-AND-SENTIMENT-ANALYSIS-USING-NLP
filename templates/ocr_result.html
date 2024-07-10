@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OCR Result</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="jumbotron text-left">
+            <h3>Extracted Text:</h3>
+            <p>{{ extracted_text }}</p>
+        </div>
+        <div class="alert alert-info">
+            <h3>Spam Classification Result:</h3>
+            <p id="spam_prediction">{{ spam_prediction }}</p>
+        </div>
+        <div class="alert alert-warning">
+            <h3>Sentiment Analysis Result:</h3>
+            <p id="polarity">Polarity: {{ sentiment_polarity }}</p>
+            <p id="subjectivity">Subjectivity: {{ sentiment_subjectivity }}</p>
+        </div>
+    </div>
+    <script>
+        // Modify sentiment polarity visualization
+        var polarityText = document.getElementById('polarity');
+        var polarity = parseFloat(polarityText.textContent.split(": ")[1]);
+        if (polarity > 0.10) {
+            polarityText.textContent = "Polarity: " + polarity.toFixed(2) + " 😄"; // Positive sentiment
+        } else if (polarity < -0.10) {
+            polarityText.textContent = "Polarity: " + polarity.toFixed(2) + " 😞"; // Negative sentiment
+        } else {
+            polarityText.textContent = "Polarity: " + polarity.toFixed(2) + " 😐"; // Neutral sentiment
+        }
+
+        // Modify spam classification visualization
+        var spamPredictionText = document.getElementById('spam_prediction');
+        var spamPrediction = parseInt(spamPredictionText.textContent.trim());
+        if (spamPrediction === 1) {
+            spamPredictionText.textContent = "Spam 🚫"; // Spam
+        } else if (spamPrediction === 0) {
+            spamPredictionText.textContent = "Not Spam ✔️"; // Not spam
+        }
+    </script>
+</body>
+</html>
